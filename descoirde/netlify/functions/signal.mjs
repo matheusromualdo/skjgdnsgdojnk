@@ -57,7 +57,9 @@ export default async (request) => {
   const listed = await db.list({ prefix: eventPrefix });
   const events = [];
   for (const item of listed.blobs) {
-    if (item.key <= String(body.cursor || "") || !item.key.startsWith(eventPrefix)) continue;
+    if (!item.key.startsWith(eventPrefix)) continue;
+    const eventId = item.key.slice(eventPrefix.length);
+    if (eventId <= String(body.cursor || "")) continue;
     const ev = await db.get(item.key, { type: "json" });
     if (!ev) continue;
     if (now - ev.at > 120000) {
