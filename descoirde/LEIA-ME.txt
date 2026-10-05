@@ -1,0 +1,30 @@
+VIBE — chamada em grupo
+=======================
+
+O app agora usa uma página estática e uma função do Netlify para trocar os dados de conexão entre navegadores. Não precisa iniciar o servidor Flask antigo.
+
+PUBLICAR NO NETLIFY
+-------------------
+Como este projeto tem uma função de servidor, publique conectando a pasta do projeto ao GitHub no Netlify, ou usando o Netlify CLI. Não use somente o upload manual de um arquivo HTML: esse modo não publica a função.
+
+Com GitHub:
+1. Envie esta pasta para um repositório GitHub.
+2. No Netlify, escolha Add new site > Import an existing project e selecione o repositório.
+3. O arquivo netlify.toml já informa a pasta publicada e onde está a função.
+4. Depois que o deploy terminar, abra o endereço do site e teste a chamada.
+
+Com Netlify CLI:
+1. Instale Node.js e o Netlify CLI.
+2. No terminal, nesta pasta, rode `npm install` e depois `npx netlify dev` para testar localmente.
+3. Rode `npx netlify deploy` para criar um rascunho e `npx netlify deploy --prod` para publicar.
+
+COMO USAR
+---------
+Abra o site, digite seu nome e entre. Use “Copiar link” para convidar outras pessoas. Todos que usam o mesmo link entram na mesma sala. Para criar outra sala, remova o parâmetro `?sala=...` do endereço e abra de novo.
+
+OBSERVAÇÕES
+-----------
+- A câmera e o microfone precisam de permissão do navegador. Em geral, dispositivos de mídia funcionam no endereço seguro HTTPS do Netlify.
+- A função de sinalização guarda mensagens temporárias no Netlify Blobs; os dados antigos deixam de ser usados após dois minutos e presenças expiram após 30 segundos sem atividade.
+- A conexão de áudio e vídeo usa WebRTC e servidores STUN/TURN públicos de demonstração. Redes restritivas podem impedir uma chamada.
+- O Netlify Blobs não oferece controle de concorrência para gravações simultâneas; este protótipo serve para chamadas pequenas e uso casual.
